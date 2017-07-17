@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 Davoud Ataee Tarzanagh  tel: 352 2810547  
 
@@ -15,3 +16,14 @@ Zheming Gao: zgao5@ncsu.edu tel: 9794508352
 Caoxin Sun: caoxin@uri.edu   tel: 4014377651
 
 >>>>>>> d0947e07fc0f7c289d8f7c73e224089c1a3381f9
+=======
+David Robinson:                 davidr.tutoring@gmail.com       tel:209 620 0233
+Davoud Ataee Tarzanagh:         tarzanagh@ufl.edu               tel: 352 2810547  
+
+Zheming Gao:                    zgao5@ncsu.edu                  tel: 9794508352
+
+Caoxin Sun:                     caoxin@uri.edu                  tel: 4014377651
+
+Li Liu: wawashui@gmail.com  tel:704-408-6238
+
+>>>>>>> 85221b17c66ad359fa9e22d5aad5205c838268d1
