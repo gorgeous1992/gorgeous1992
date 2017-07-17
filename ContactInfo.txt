@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Davoud Ataee Tarzanagh  tel: 352 2810547  
 
@@ -5,3 +6,12 @@ Zheming Gao: zgao5@ncsu.edu tel: 9794508352
 
 
 Chathurangi H. K Pathiravasan, email:chathurangi@siu.edu , tel:6183055047
+=======
+
+Davoud Ataee Tarzanagh  tel: 352 2810547  
+
+Zheming Gao: zgao5@ncsu.edu tel: 9794508352
+
+Caoxin Sun: caoxin@uri.edu   tel: 4014377651
+
+>>>>>>> d0947e07fc0f7c289d8f7c73e224089c1a3381f9
