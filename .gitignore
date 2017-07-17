@@ -1,5 +1,6 @@
 *.aux
 *.pdf
-*.py
+*.pyc
 
-
+doc/
+data/
