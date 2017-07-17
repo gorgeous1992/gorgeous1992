@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is some test text.
 
 Another line of text
@@ -6,4 +7,5 @@ a + b + c = d
 
 alternate history: neat
 
-David Robinson  davidr.tutoring@gmail.com
+David Robinson  davidr.tutoring@gmail.com tel:209 620 0233
+Davoud Ataee Tarzanagh  tel: 352 2810547  
