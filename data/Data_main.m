@@ -2,7 +2,7 @@ clc
 clear all
 load('072216wavenumbers','wavenum');
 load('072216wavefrequences','wavefreq');
-
+load('timecolumn.mat', 'time_col');
 %% Plot one piece
 
 Z = squeeze(wavenum(1,:,:,12));
@@ -21,6 +21,20 @@ Stat_wavenum = 1/4 * (wavenum(1,:,:,:) + wavenum(2,:,:,:) + ...
 %squeeze it and denote as Stat_Z(3d matrix)            
 Stat_Z = squeeze(Stat_wavenum(:,:,:,:));
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Let's fix y coordinate and do 1-d problem
+y_1d = 1;
+
+temp_Z = zeros(length(Stat_Z(:,1,1)) + 1, length(Stat_Z(1,1,:)));
+for i = 1 : length(temp_Z(1,:))
+    temp_Z(2:end, i) = Stat_Z(:, y_1d, i);
+end
+temp_Z(1,:) = time_col';
+rm_id = find(abs(temp_Z(2:end, :)) > 1);
+temp_Z(rm_id) = NaN
+Z_csv = temp_Z;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 W = squeeze(wavefreq(1,:,:,12));
 
 %Remove fake value (elements >1 or negative)
@@ -37,8 +51,7 @@ size(T)
 %Height row is Depth on [x, y].
 %Coordinate x is 50:12:950,
 %Coordinate y is -100:24:1100
-length(T(:, 3))
-Depth = reshape(T(:, 3), [76, 51])
+Depth = reshape(T(:, 3), [76, 51]);
 
 surf(Depth)
 

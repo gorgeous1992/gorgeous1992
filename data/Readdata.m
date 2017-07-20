@@ -22,7 +22,9 @@ temptime = datenum(2016, 7, 22);
 %pause
 %find the index of 'temptime' in 'time', save as ii
 ii = find(floor(time) == temptime);
-
+time_col = time(ii)
+%Date version
+datestr(time(ii));
 %pull out needed info from 'var'
 %k is the wave number with coordinates on 07/22/17
 wavenum = ncread(var, 'k', [1,1,1, min(ii)], [inf , inf, inf, length(ii)]);
