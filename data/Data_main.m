@@ -33,7 +33,7 @@ for i = 1 : length(temp_Z(1,:))
     temp_Z(2:end, i) = Stat_Z(:, y_1d, i);
 end
 temp_Z(1,:) = time_col';
-rm_id = find(abs(temp_Z(2:end, :)) > 1);
+rm_id = find(temp_Z(2:end, :) < 0);
 temp_Z(rm_id) = NaN;
 Z_csv = temp_Z;
 

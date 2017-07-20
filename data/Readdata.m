@@ -22,7 +22,9 @@ temptime = datenum(2016, 7, 22);
 %pause
 %find the index of 'temptime' in 'time', save as ii
 ii = find(floor(time) == temptime);
-time_col = tt/(24*3600) + temptime
+%time_col is in minutes for 07/22/16
+timeday = time(ii);
+time_col = (timeday - timeday(1))*24*60
 %Date version
 datestr(time(ii));
 %pull out needed info from 'var'
