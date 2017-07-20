@@ -11,8 +11,8 @@ Z = squeeze(wavenum(1,:,:,12));
 rm_id = find(Z < 0);
 Z(rm_id) = NaN;
 
-figure
-surf(Z)
+%figure
+%surf(Z)
 
 %%%%%%%%
 %%%%%%%%
@@ -60,8 +60,8 @@ W = squeeze(wavefreq(1,:,:,12));
 rm_id = find(W < 0);
 W(rm_id) = NaN;
 
-figure
-surf(W)
+%figure
+%surf(W)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %For statistic forcasting through time series
@@ -91,6 +91,8 @@ for i = 1 : sz(1)
 end
 W_csv = temp_W;
 
+% figure
+% plot(W_csv)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%
@@ -107,8 +109,24 @@ size(T)
 %Coordinate x is 50:12:950,
 %Coordinate y is -100:24:1100
 Depth = reshape(T(:, 3), [76, 51]);
+Depth_y1 = T([1:76], 3);
+x_depth = [50:12:950]';
+y_depth = [-100:24:1100]';
 
+
+figure
 surf(Depth)
+xlabel('X')
+ylabel('Y')
+zlabel('depth')
+title('depth')
+
+figure
+%Plot the depth_y1, one piece
+plot(Depth_y1)
+xlabel('X')
+ylabel('Y')
+title('depth fixed y1')
 
 
 
