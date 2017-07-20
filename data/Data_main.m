@@ -13,6 +13,14 @@ Z(rm_id) = NaN;
 figure
 surf(Z)
 
+%For statistic forcasting through time series
+%take wavenum of four types of waves
+%Denote as Stat_wavenum
+Stat_wavenum = 1/4 * (wavenum(1,:,:,:) + wavenum(2,:,:,:) + ...
+                wavenum(3,:,:,:) + wavenum(4,:,:,:));
+%squeeze it and denote as Stat_Z(3d matrix)            
+Stat_Z = squeeze(Stat_wavenum(:,:,:,:));
+
 W = squeeze(wavefreq(1,:,:,12));
 
 %Remove fake value (elements >1 or negative)
