@@ -46,13 +46,7 @@ Z_csv = temp_Z;
 %%%%%%%%
 %%%%%%%%
 
-%For statistic forcasting through time series
-%take wavenum of four types of waves
-%Denote as Stat_wavenum
-Stat_wavenum = 1/4 * (wavenum(1,:,:,:) + wavenum(2,:,:,:) + ...
-                wavenum(3,:,:,:) + wavenum(4,:,:,:));
-%squeeze it and denote as Stat_Z(3d matrix)            
-Stat_Z = squeeze(Stat_wavenum(:,:,:,:));
+
 W = squeeze(wavefreq(1,:,:,12));
 
 %Remove fake value (elements >1 or negative)
@@ -63,6 +57,13 @@ figure
 surf(W)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%For statistic forcasting through time series
+%take wavenum of four types of waves
+%Denote as Stat_wavenum
+Stat_wavefreq = 1/4 * (wavefreq(1,:,:,:) + wavefreq(2,:,:,:) + ...
+                wavefreq(3,:,:,:) + wavefreq(4,:,:,:));
+%squeeze it and denote as Stat_Z(3d matrix)            
+Stat_W = squeeze(Stat_wavefreq(:,:,:,:));
 %Let's fix y coordinate and do 1-d problem
 %For the wavefrequency
 y_1d = 1;
