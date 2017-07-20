@@ -1,5 +1,6 @@
 clc
 clear all
+
 load('072216wavenumbers','wavenum');
 load('072216wavefrequences','wavefreq');
 load('timecolumn.mat', 'time_col');
@@ -7,7 +8,7 @@ load('timecolumn.mat', 'time_col');
 
 Z = squeeze(wavenum(1,:,:,12));
 %Remove fake value (elements >1 or negative)
-rm_id = find(abs(Z) > 1);
+rm_id = find(Z < 0);
 Z(rm_id) = NaN;
 
 figure
@@ -33,8 +34,14 @@ for i = 1 : length(temp_Z(1,:))
     temp_Z(2:end, i) = Stat_Z(:, y_1d, i);
 end
 temp_Z(1,:) = time_col';
-rm_id = find(temp_Z(2:end, :) < 0);
-temp_Z(rm_id) = NaN;
+sz = size(temp_Z);
+for i = 1 : sz(1)
+    for j = 1 : sz(2)
+        if temp_Z(i, j) < 0
+            temp_Z(i,j) = NaN;
+        end
+    end
+end
 Z_csv = temp_Z;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,8 +80,15 @@ for i = 1 : length(temp_W(1,:))
     temp_W(2:end, i) = Stat_W(:, y_1d, i);
 end
 temp_W(1,:) = time_col';
-rm_id = find(temp_W(2:end, :) < 0);
-temp_W(rm_id) = NaN;
+
+sz = size(temp_W);
+for i = 1 : sz(1)
+    for j = 1 : sz(2)
+        if temp_W(i, j) < 0
+            temp_W(i,j) = NaN;
+        end
+    end
+end
 W_csv = temp_W;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
