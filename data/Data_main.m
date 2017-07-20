@@ -27,7 +27,7 @@ Stat_Z = squeeze(Stat_wavenum(:,:,:,:));
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Let's fix y coordinate and do 1-d problem
 %For the wavenumber
-y_1d = 1;
+y_1d = 2;
 
 temp_Z = zeros(length(Stat_Z(:,1,1)) + 1, length(Stat_Z(1,1,:)));
 for i = 1 : length(temp_Z(1,:))
