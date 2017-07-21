@@ -6,26 +6,7 @@ load('072216wavefrequences','wavefreq');
 load('timecolumn.mat', 'time_col');
 load('Cbathy_xcoor.mat', 'x_coor');
 load('Cbathy_ycoor.mat', 'y_coor');
-%% Plot one piece
-Z = squeeze(wavenum(1,:,:,12));
-size(Z)
-size(x_coor)
-size(y_coor)
-%Remove fake value (elements >1 or negative)
-rm_id = find(Z < 0);
-Z(rm_id) = 0;
-[X, Y] = meshgrid(x_coor, y_coor);
-% size(X)
-% size(Y)
-%plot wavenumbers
-figure
-%pay attension to dimensions
-surf(X, Y, Z')
-xlabel('Crossshore distance(m)')
-ylabel('Alongshore distance(m)')
-zlabel('wavenumber')
-title('Wavenumber(Cbathy)')
-
+%% Statistic data (wavenumber)
 %%%%%%%%
 %%%%%%%%
 %For statistic forcasting through time series
@@ -57,6 +38,28 @@ end
 Z_csv = temp_Z;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Plot one piece at time_col(1)
+Z = squeeze(wavenum(1,:,:,12));
+size(Z)
+size(x_coor)
+size(y_coor)
+%Remove fake value (elements >1 or negative)
+rm_id = find(Z < 0);
+Z(rm_id) = 0;
+[X, Y] = meshgrid(x_coor, y_coor);
+% size(X)
+% size(Y)
+%plot wavenumbers
+figure
+%pay attension to dimensions
+surf(X, Y, Z')
+xlabel('Crossshore distance(m)')
+ylabel('Alongshore distance(m)')
+zlabel('wavenumber')
+title('Wavenumber(Cbathy)')
+
+%%
 
 %%%%%%%%
 %%%%%%%%

@@ -34,7 +34,7 @@ wavenum = ncread(var, 'k', [1,1,1, min(ii)], [inf , inf, inf, length(ii)]);
 wavefreq = ncread(var, 'fB', [1,1,1, min(ii)], [inf, inf, inf, length(ii)]);
 
 %% Import data for wave height
-T = importdata('FRF_20160726_1121_FRF_NAVD88_LARC_GPS_UTC_v20170320_grid_latlon.txt');
+T = importdata('topo0726.txt');
 class(T);
 
 x_coor = ncread(var, 'xm');
