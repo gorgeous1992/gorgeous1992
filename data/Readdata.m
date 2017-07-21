@@ -23,8 +23,8 @@ temptime = datenum(2016, 7, 22);
 %find the index of 'temptime' in 'time', save as ii
 ii = find(floor(time) == temptime);
 %time_col is in minutes for 07/22/16
-timeday = time(ii)
-time_col = (timeday - timeday(1))*24*60
+timeday = time(ii);
+time_col = (timeday - timeday(1))*24*60;
 %Date version
 datestr(time(ii));
 %pull out needed info from 'var'
@@ -34,7 +34,7 @@ wavenum = ncread(var, 'k', [1,1,1, min(ii)], [inf , inf, inf, length(ii)]);
 wavefreq = ncread(var, 'fB', [1,1,1, min(ii)], [inf, inf, inf, length(ii)]);
 
 %% Import data for wave height
-T = importdata('FRF_20160726_1121_FRF_NAVD88_LARC_GPS_UTC_v20170320_grid_latlon.txt');
+T = importdata('topo0726.txt');
 class(T);
 
 x_coor = ncread(var, 'xm');
