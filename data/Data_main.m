@@ -1,5 +1,4 @@
-clc
-clear all
+
 
 load('072216wavenumbers','wavenum');
 load('072216wavefrequences','wavefreq');
@@ -11,8 +10,8 @@ Z = squeeze(wavenum(1,:,:,12));
 rm_id = find(Z < 0);
 Z(rm_id) = NaN;
 
-%figure
-%surf(Z)
+figure
+surf(Z)
 
 %%%%%%%%
 %%%%%%%%
@@ -60,8 +59,8 @@ W = squeeze(wavefreq(1,:,:,12));
 rm_id = find(W < 0);
 W(rm_id) = NaN;
 
-%figure
-%surf(W)
+figure
+surf(W)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %For statistic forcasting through time series
