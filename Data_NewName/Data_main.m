@@ -1,18 +1,12 @@
-
+clc 
+clear all
 
 load('072216wavenumbers','wavenum');
 load('072216wavefrequences','wavefreq');
 load('timecolumn.mat', 'time_col');
-%% Plot one piece
-
-Z = squeeze(wavenum(1,:,:,12));
-%Remove fake value (elements >1 or negative)
-rm_id = find(Z < 0);
-Z(rm_id) = NaN;
-
-figure
-surf(Z)
-
+load('Cbathy_xcoor.mat', 'x_coor');
+load('Cbathy_ycoor.mat', 'y_coor');
+%% Statistic data (wavenumber)
 %%%%%%%%
 %%%%%%%%
 %For statistic forcasting through time series
@@ -45,6 +39,28 @@ Z_csv = temp_Z;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% Plot one piece at time_col(1)
+Z = squeeze(wavenum(1,:,:,12));
+size(Z)
+size(x_coor)
+size(y_coor)
+%Remove fake value (elements >1 or negative)
+rm_id = find(Z < 0);
+Z(rm_id) = 0;
+[X, Y] = meshgrid(x_coor, y_coor);
+% size(X)
+% size(Y)
+%plot wavenumbers
+figure
+%pay attension to dimensions
+surf(X, Y, Z')
+xlabel('Crossshore distance(m)')
+ylabel('Alongshore distance(m)')
+zlabel('wavenumber')
+title('Wavenumber(Cbathy)')
+
+%%
+
 %%%%%%%%
 %%%%%%%%
 
@@ -59,8 +75,17 @@ W = squeeze(wavefreq(1,:,:,12));
 rm_id = find(W < 0);
 W(rm_id) = NaN;
 
+[X, Y] = meshgrid(x_coor, y_coor);
+% size(X)
+% size(Y)
+%plot wavefrequency
 figure
-surf(W)
+%pay attension to dimensions
+surf(X, Y, W')
+xlabel('Crossshore distance(m)')
+ylabel('Alongshore distance(m)')
+zlabel('wavefrequency')
+title('Wavefrequency (Cbathy)')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %For statistic forcasting through time series
@@ -107,25 +132,26 @@ size(T)
 %Height row is Depth on [x, y].
 %Coordinate x is 50:12:950,
 %Coordinate y is -100:24:1100
-Depth = reshape(T(:, 3), [76, 51]);
-Depth_y1 = T([1:76], 3);
-x_depth = [50:12:950]';
-y_depth = [-100:24:1100]';
+Topo = reshape(T(:, 3), [76, 51]);
+Topo_y1 = T([1:76], 3);
+x_topo = [50:12:950]';
+y_topo = [-100:24:1100]';
 
+[X, Y] = meshgrid(x_topo, y_topo);
 
 figure
-surf(Depth)
-xlabel('X')
-ylabel('Y')
-zlabel('depth')
-title('depth')
+surf(X, Y, Topo')
+xlabel('Crossshore distance(m)')
+ylabel('Alongshore distance(m)')
+zlabel('Elevation')
+title('Elevation')
 
 figure
 %Plot the depth_y1, one piece
-plot(Depth_y1)
-xlabel('X')
-ylabel('Y')
-title('depth fixed y1')
+plot(x_topo, Topo_y1)
+xlabel('Crossshore distance(m)')
+ylabel('Elevation')
+title('Elevation (fixed y = y1)')
 
 
 
