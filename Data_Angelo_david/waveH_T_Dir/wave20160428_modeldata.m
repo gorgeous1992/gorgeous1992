@@ -14,6 +14,7 @@ xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/x
 
 var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 %% Get wavenum from cBathy data
+ncdisp(var)
 tt = ncread(var,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
 %pick tm
@@ -23,13 +24,13 @@ id = find(floor(time) == tm);
 timeneed_id = id(12);
 wavenum = ncread(var, 'k', [1,1,1,min(id)], [inf , inf, inf, length(id)]);
 temp = 1/4*(wavenum(1,:,:,12) + wavenum(2,:,:,12) + ...
-    wavenum(3,:,:,12) + wavenum(4,:,:,12));
+    wavenum(3,:,:,12) + wavenum(4,:,:,12))
 wavenum = squeeze(temp);
 xm = ncread(var, 'xm');
 ym = ncread(var, 'ym');
 yjd = find(ym == 950);
 wavenum_1d = (wavenum(:, yjd));
-wavenum_data = [xm, wavenum_1d];
+wavenum_data = [xm, wavenum_1d]
 save('wavenum20160428_11am', 'wavenum_data');
 
 %% save data 8m_array ncdisp(var)

@@ -3,7 +3,6 @@ clear all
 %% get data
 %boundary data: 8m_array, x = 900m
 Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2016/FRF-ocean_waves_8m-array_201604.nc';
-ncdisp(Bd_data)
 %Inside data
 awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2016/FRF-ocean_waves_awac-6m_201604.nc';
 %awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-4.5m/2017/FRF-ocean_waves_awac-4.5m_201703.nc';
@@ -14,6 +13,7 @@ xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/x
 
 var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 %% Get wavenum from cBathy data
+ncdisp(var)
 tt = ncread(var,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
 %pick tm
@@ -23,13 +23,13 @@ id = find(floor(time) == tm);
 timeneed_id = id(12);
 wavenum = ncread(var, 'k', [1,1,1,min(id)], [inf , inf, inf, length(id)]);
 temp = 1/4*(wavenum(1,:,:,12) + wavenum(2,:,:,12) + ...
-    wavenum(3,:,:,12) + wavenum(4,:,:,12));
+    wavenum(3,:,:,12) + wavenum(4,:,:,12))
 wavenum = squeeze(temp);
-xm = ncread(var, 'xm')
+xm = ncread(var, 'xm');
 ym = ncread(var, 'ym');
 yjd = find(ym == 950);
 wavenum_1d = (wavenum(:, yjd));
-wavenum_data = [xm, wavenum_1d];
+wavenum_data = [xm, wavenum_1d]
 save('wavenum20160428_11am', 'wavenum_data');
 
 %% save data 8m_array ncdisp(var)
@@ -52,25 +52,6 @@ depth = ncread(Bd_data, 'depth');
 %time 04/28/2016 11:00:00
 boundary = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
 
-%% save data  adop_35
-%Get time from it.
-tt = ncread(adop_35,'time');
-time = tt/(24*3600) + datenum(1970,1,1);
-%pick tm
-tm = datenum(2016,04,28);
-id = find(floor(time) == tm);
-%Pick 04/28/2016 at 11am
-timeneed = time(id(12));
-%get wave height
-waveHs = ncread(adop_35, 'waveHs');
-%get waveTp
-waveTp = ncread(adop_35, 'waveTp');
-%get wave depth
-depth = ncread(adop_35, 'depth');
-
-%time 04/28/2016 11:00:00
-wave_adop35 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
-
 %% save data  awac_6
 %Get time from it.
 tt = ncread(awac_6,'time');
@@ -87,13 +68,11 @@ waveTp = ncread(awac_6, 'waveTp');
 %get wave depth
 depth = ncread(awac_6, 'depth');
 
-%Get wavenum from cBathy data
-wavenum = ncread(var, 'k');
-
+%time 04/28/2016 11:00:00
+wave_awac6 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
 
 %% save data  adop_35
 %Get time from it.
-ncdisp(adop_35)
 tt = ncread(adop_35,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
 %pick tm
@@ -108,6 +87,7 @@ depth = ncread(adop_35, 'depth');
 
 %time 04/28/2016 11:00:00
 wave_adop35 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
+
 %% save data  xp150
 %Get time from it.
 tt = ncread(xp150,'time');
@@ -178,5 +158,5 @@ wave_xp200 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
 %[waveHs waveTp depth]
 %Time is at 04/28/2016 11:00:00
 wavedata = [boundary; wave_awac6; wave_adop35;...
-      wave_xp200; wave_xp150; wave_xp125]
+      wave_xp200; wave_xp150; wave_xp125];
 save('wavedata20160428_11am', 'wavedata')
