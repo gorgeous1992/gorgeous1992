@@ -8,9 +8,9 @@ ncdisp(Bd_data)
 awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2016/FRF-ocean_waves_awac-6m_201604.nc';
 %awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-4.5m/2017/FRF-ocean_waves_awac-4.5m_201703.nc';
 adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/adop-3.5m_tjh/2016/FRF-ocean_waves_adop-3.5m_201604.nc';
-xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m/2016/FRF-ocean_waves_xp150m_201604.nc';
-xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m/2016/FRF-ocean_waves_xp125m_201604.nc';
-xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m/2016/FRF-ocean_waves_xp200m_201604.nc';
+xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2016/FRF-ocean_waves_xp150m_201604.nc';
+xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2016/FRF-ocean_waves_xp125m_201604.nc';
+xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201604.nc';
 
 var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 %% Get wavenum from cBathy data
@@ -61,7 +61,7 @@ time = tt/(24*3600) + datenum(1970,1,1);
 tm = datenum(2016,04,28);
 id = find(floor(time) == tm);
 %Pick 04/28/2016 at 11am
-timeneed = time(id(12));
+timeneed_id = id(12);
 %get wave height
 waveHs = ncread(awac_6, 'waveHs');
 %get waveTp
@@ -97,7 +97,7 @@ time = tt/(24*3600) + datenum(1970,1,1);
 tm = datenum(2016,04,28);
 id =find(floor(time) == tm);
 %Pick 04/28/2016 at 11am
-timeneed = time(id(12));
+timeneed_id = id(12);
 %get wave height
 
 %ncdisp(xp150)
@@ -111,7 +111,7 @@ depth = ncread(xp150, 'depthP');
 
 
 %time 04/28/2016 11:00:00
-wave_xp150 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
+wave_xp150 = [waveHs(timeneed_id), waveTm(timeneed_id), depth(timeneed_id)];
 
 %% save data  xp125
 %Get time from it.
@@ -121,7 +121,7 @@ time = tt/(24*3600) + datenum(1970,1,1);
 tm = datenum(2016,04,28);
 id = find(floor(time) == tm);
 %Pick 04/28/2016 at 11am
-timeneed = time(id(12));
+timeneed_id = id(12);
 %get wave height
 waveHs = ncread(xp125, 'waveHs');
 %get waveTm: mean spectral period
@@ -131,7 +131,7 @@ waveTm = ncread(xp125, 'waveTm');
 depth = ncread(xp125, 'depthP');
 
 %time 04/28/2016 11:00:00
-wave_xp125 = [waveHs(timeneed_id), waveTp(timeneed_id), depth(timeneed_id)];
+wave_xp125 = [waveHs(timeneed_id), waveTm(timeneed_id), depth(timeneed_id)];
 
 %% save data  xp200
 %Get time from it.
@@ -141,7 +141,7 @@ time = tt/(24*3600) + datenum(1970,1,1);
 tm = datenum(2016,04,28);
 id = find(floor(time) == tm);
 %Pick 04/28/2016 at 11am
-timeneed = time(id(12));
+timeneed = id(12);
 %get wave height
 waveHs = ncread(xp200, 'waveHs');
 %get waveTm: mean spectral period
