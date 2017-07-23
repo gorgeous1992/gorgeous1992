@@ -1,11 +1,9 @@
-clc
-clear all
-
-topo = importdata('topograpy_y956_042816_1118.mat');
+function Slope = ShoreDetection(topo, tau)
+%topo = importdata('topograpy_y956_042816_1118.mat');
 
 xs = linspace(50, 950, 76);
 nSample = 20;
-tau = -.08;
+%tau = -.08;
 topo = topo - tau;
 %Find min index 
 [~, zeroIndex] = min(abs(topo));
@@ -35,8 +33,8 @@ b = b';
 
 slope = (topo(rIndex)-topo(lIndex))/(xs(rIndex)-xs(lIndex));
 fprintf("data slope = %f\n",slope);
-linSolve = (A'*A)\(A'*b)
-fprintf('Slope = %f\n',linSolve(1))
+linSolve = (A'*A)\(A'*b);
+Slope = linSolve(1);
 
 figure
 subplot(1,2,1)
