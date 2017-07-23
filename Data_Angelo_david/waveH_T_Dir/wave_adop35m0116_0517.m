@@ -15,6 +15,7 @@ jj = find(floor(time) == temptime2);
 time16_17 = time(ii(1) : jj(end));
 hours16_17 = (time16_17 - time16_17(1))*24;
 
+dtt = string(datestr(time16_17));
 
 datestr(time16_17(1))
 datestr(time16_17(end))
@@ -38,6 +39,10 @@ waveDir16_17 = waveDir(ii(1):jj(end));
 depth = ncread(ncfile, 'depth');
 depth16_17 = depth(ii(1):jj(end));
 
-%save data
-dlmwrite('WaveH_T_Dir_1617_adop35.csv', [hours16_17, waveHs16_17, waveTp16_17,...
-        waveDir16_17,depth16_17]);
+% %save data
+% dlmwrite('WaveH_T_Dir_1617_adop35.csv', [hours16_17, waveHs16_17, waveTp16_17,...
+%         waveDir16_17,depth16_17]);
+
+T = table(dtt, [waveHs16_17, waveTp16_17,...
+       waveDir16_17, depth16_17])
+writetable(T, 'WaveH_T_Dir_1617_adop35.csv')
