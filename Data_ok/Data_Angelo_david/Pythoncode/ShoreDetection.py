@@ -18,20 +18,27 @@ if(topo[zeroIndex]<=0):
 else:
   lIndex = zeroIndex
   rIndex = zeroIndex + 1
+
 #Generalize to check that farthest left index is non-negative
 #in other words if lIndex - shift <0 then solve lIndex -shift +c = 0
 #then rShiftedIndex = rIndex + shift + c
 xInt = xs[lIndex-1:rIndex+2]
+#print('xInt', xInt)
 topInt = topo[lIndex-1:rIndex+2]
+
+print('xInt, topInt', xInt,topInt)
 interp = pchip(xInt,topInt)
 xsInt = linspace(xInt[0],xInt[-1],nSample)
 A = ones((nSample,2))
+
 A[:,0]= xsInt
+#print('A', A)
 b = interp(xsInt)
 #kdahskdjfh
 slope = (topo[rIndex]-topo[lIndex])/(xs[rIndex]-xs[lIndex])
 print("data slope",slope)
 linSolve = linalg.solve(dot(transpose(A),A),dot(transpose(A),b))
+
 print('Slope',linSolve[0])
 plt.plot(xsInt,interp(xsInt))
 plt.plot(xInt,topInt)
