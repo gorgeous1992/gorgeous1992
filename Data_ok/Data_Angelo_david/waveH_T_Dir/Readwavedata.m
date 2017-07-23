@@ -2,16 +2,16 @@ clc
 clear all
 %% get data
 %boundary data: 8m_array, x = 900m
-Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2016/FRF-ocean_waves_8m-array_201605.nc';
+Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2016/FRF-ocean_waves_8m-array_201604.nc';
 %ncdisp(Bd_data)
 %Inside date
-awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2016/FRF-ocean_waves_awac-6m_201605.nc';
+awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2016/FRF-ocean_waves_awac-6m_201604.nc';
 %awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-4.5m/2017/FRF-ocean_waves_awac-4.5m_201703.nc';
-adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/adop-3.5m_tjh/2016/FRF-ocean_waves_adop-3.5m_201605.nc';
-xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2016/FRF-ocean_waves_xp150m_201605.nc';
-xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2016/FRF-ocean_waves_xp125m_201605.nc';
-xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201605.nc';
-%ncdisp(xp150)
+adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/adop-3.5m_tjh/2016/FRF-ocean_waves_adop-3.5m_201604.nc';
+xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2016/FRF-ocean_waves_xp150m_201604.nc';
+xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2016/FRF-ocean_waves_xp125m_201604.nc';
+xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201604.nc';
+ncdisp(adop_35)
 
 
 var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201605.nc';
@@ -36,22 +36,24 @@ var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/dat
 % wavenum_data = [xm, wavenum_1d];
 % save('wavenum20160527_11am', 'wavenum_data');
 
-dateselected = datenum(2016, 05, 25);
+dateselected = datenum(2016, 04, 28);
 %% save data 8m_array 
 
 [hs, tp, dp, date] = Read_awac_adop(Bd_data, dateselected);
-bdry = [hs, tp, dp, date];
-bdry(:, 4)
-
+[dir, date] = Readwavedir_awac_adop(Bd_data, dateselected)
+bdry = [hs, tp, dp, dir, date];
+bdry(:, 5)
 %% save data  awac_6
 
 [hs, tp, dp, date] = Read_awac_adop(awac_6, dateselected);
-wave_awac6 = [hs, tp, dp, date];
-wave_awac6(:, 4)
+[dir, date] = Readwavedir_awac_adop(awac_6, dateselected)
+wave_awac6 = [hs, tp, dp, dir, date];
+wave_awac6(:, 5)
 %% save data  adop_35
 [hs, tp, dp, date] = Read_awac_adop(adop_35, dateselected);
-wave_adop35 = [hs, tp, dp, date];
-wave_adop35(:, 4)
+[dir, date] = Readwavedir_awac_adop(adop_35, dateselected)
+wave_adop35 = [hs, tp, dp, dir, date];
+wave_adop35(:, 5)
 %% save data  xp150
 
 [hs, tp, dp, date] = Read_xp(xp150, dateselected);
