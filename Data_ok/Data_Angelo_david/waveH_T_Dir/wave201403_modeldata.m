@@ -1,9 +1,9 @@
 clc
 clear all
 %% get data
-awac_8 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-8m/2014/FRF-ocean_waves_awac-8m_201403.nc';
-awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2014/FRF-ocean_waves_awac-6m_201403.nc';
-awac_5 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-5m/2014/FRF-ocean_waves_awac-5m_201403.nc';
+awac_8 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-8m/2016/FRF-ocean_waves_awac-8m_201604.nc';
+awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2016/FRF-ocean_waves_awac-6m_201604.nc';
+adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-5m/2016/FRF-ocean_waves_awac-5m_201604.nc';
 
 %% save data awac_8
 %Get time from it.
