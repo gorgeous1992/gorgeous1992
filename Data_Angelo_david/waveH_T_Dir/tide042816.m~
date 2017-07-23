@@ -1,8 +1,0 @@
-clc
-clear all
-%Import tide data
-M = importdata('tide042816.csv');
-temp = M.data;
-t
-
-
