@@ -11,7 +11,7 @@ adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves
 xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2016/FRF-ocean_waves_xp150m_201604.nc';
 xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2016/FRF-ocean_waves_xp125m_201604.nc';
 xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201604.nc';
-
+%ncdisp(xp150)
 
 var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 %% Get wavenum from cBathy data
@@ -35,18 +35,18 @@ dateselected = datenum(2016, 04, 28);
 %% save data 8m_array 
 
 [hs, tp, dp, date] = Read_awac_adop(Bd_data, dateselected);
-[dir, date] = Readwavedir_awac_adop(Bd_data, dateselected)
+[dir, date] = Readwavedir_awac_adop(Bd_data, dateselected);
 bdry = [hs, tp, dp, dir, date];
 bdry(:, 5)
 %% save data  awac_6
 
 [hs, tp, dp, date] = Read_awac_adop(awac_6, dateselected);
-[dir, date] = Readwavedir_awac_adop(awac_6, dateselected)
+[dir, date] = Readwavedir_awac_adop(awac_6, dateselected);
 wave_awac6 = [hs, tp, dp, dir, date];
 wave_awac6(:, 5)
 %% save data  adop_35
 [hs, tp, dp, date] = Read_awac_adop(adop_35, dateselected);
-[dir, date] = Readwavedir_awac_adop(adop_35, dateselected)
+[dir, date] = Readwavedir_awac_adop(adop_35, dateselected);
 wave_adop35 = [hs, tp, dp, dir, date];
 wave_adop35(:, 5)
 %% save data  xp150
@@ -70,7 +70,19 @@ wave_xp200(:, 4)
 %[waveHs waveTp depth]
 xid = [13, 13, 13, 13, 13, 13];
 
+%% Longitude and latitude for sensors
+alpha = [ncread(Bd_data, 'longitude'); ncread(awac_6, 'longitude'); ...
+    ncread(adop_35, 'longitude'); ncread(xp200, 'lon'); ...
+    ncread(xp150, 'lon'); ncread(xp125, 'lon')];
+
+beta = [ncread(Bd_data, 'latitude'); ncread(awac_6, 'latitude'); ...
+    ncread(adop_35, 'latitude'); ncread(xp200, 'lat'); ...
+    ncread(xp150, 'lat'); ncread(xp125, 'lat')];
+
+
 wavedata = str2double([bdry(xid(1), [1:3]); wave_awac6(xid(2), [1:3]);...
            wave_adop35(xid(3), [1:3]); wave_xp200(xid(4), [1:3]);...
-            wave_xp150(xid(5), [1:3]); wave_xp125(xid(6), [1:3])])
+            wave_xp150(xid(5), [1:3]); wave_xp125(xid(6), [1:3])]);
+
+wavedata_global = [alpha, beta, wavedata]    
 %save('wavedata20160525_11am', 'wavedata')
