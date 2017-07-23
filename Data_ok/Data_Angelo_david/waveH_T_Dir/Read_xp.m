@@ -15,11 +15,11 @@ datatime = string(datestr(time(id)));
 %get wave height
 waveHs = ncread(file, 'waveHs');
 %get wave Time period
-waveTm = ncread(file, 'waveTm');
+waveT = ncread(file, 'waveTpPeak');
 %get wave depth
 depth = ncread(file, 'depthP');
 
 wavehsid = waveHs(id);
-wavetpid = waveTm(id);
+wavetpid = waveT(id);
 depthid = depth(id);
 end
