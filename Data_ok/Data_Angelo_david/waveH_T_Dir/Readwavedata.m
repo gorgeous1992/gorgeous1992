@@ -11,31 +11,26 @@ adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves
 xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2016/FRF-ocean_waves_xp150m_201604.nc';
 xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2016/FRF-ocean_waves_xp125m_201604.nc';
 xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201604.nc';
-ncdisp(adop_35)
 
 
-var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201605.nc';
+var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 %% Get wavenum from cBathy data
-% %ncdisp(var)
-% tt = ncread(var,'time');
-% time = tt/(24*3600) + datenum(1970,1,1);
-% %pick tm
-% tm = datenum(2016, 05, 27);
-% id = find(floor(time) == tm);
-% datestr(time(id))
-% %Pick 03/11/2016 at 11am
-% timeneed_id = id(11);
-% wavenum = ncread(var, 'k', [1,1,1,min(id)], [inf , inf, inf, length(id)]);
-% temp = 1/4*(wavenum(1,:,:,12) + wavenum(2,:,:,12) + ...
-%     wavenum(3,:,:,12) + wavenum(4,:,:,12));
-% wavenum = squeeze(temp);
-% xm = ncread(var, 'xm');
-% ym = ncread(var, 'ym');
-% yjd = find(ym == 950);
-% wavenum_1d = (wavenum(:, yjd));
-% wavenum_data = [xm, wavenum_1d];
-% save('wavenum20160527_11am', 'wavenum_data');
-
+%ncdisp(var)
+tt = ncread(var,'time');
+time = tt/(24*3600) + datenum(1970,1,1);
+%pick tm
+tm = datenum(2016, 04, 28);
+id = find(floor(time) == tm);
+datestr(time(id));
+%Pick 04/28/2016 at 12am
+timeneed_id = id(2);
+wavedepth = ncread(var, 'depthKF', [1,1,min(id)], [inf, inf, length(id)]);
+wavedepth = wavedepth(:, :, 2);
+xm = ncread(var, 'xm');
+ym = ncread(var, 'ym');
+yjd = find(ym == 950);
+wavedepth_1d = [xm, wavedepth(:, yjd)];
+%wavedepth_data = [xm, wavedepth_1d];
 dateselected = datenum(2016, 04, 28);
 %% save data 8m_array 
 
