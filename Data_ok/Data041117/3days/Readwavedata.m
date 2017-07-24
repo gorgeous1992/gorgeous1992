@@ -28,7 +28,8 @@ boundary_3days = str2double(bdry(:, [1,2,3,4]));
 [dir, date] = Readwavedir_awac_adop(awac_6, dateselected);
 wave_awac6 = [hs, tp, dp, dir, date];
 wave_awac6(:, 5)
-wave_awac6_3days = wave_awac6(:, [1,2,3,4]);
+
+wave_awac6_3days = str2double(wave_awac6(:, [1,2,3,4]));
 %% save data  awac_45
 
 [hs, tp, dp, date] = Read_awac_adop(awac_45, dateselected);
@@ -36,21 +37,28 @@ wave_awac6_3days = wave_awac6(:, [1,2,3,4]);
 wave_awac45 = [hs, tp, dp, dir, date];
 wave_awac45(:, 5)
 
+wave_awac45_3days = str2double(wave_awac45(:, [1,2,3,4]));
 %% save data  adop_35
 [hs, tp, dp, date] = Read_awac_adop(adop_35, dateselected);
 [dir, date] = Readwavedir_awac_adop(adop_35, dateselected);
 wave_adop35 = [hs, tp, dp, dir, date];
 wave_adop35(:, 5)
+
+wave_adop35_3days = str2double(wave_adop35(:, [1,2,3,4]));
 %% save data  xp150
 
 [hs, tp, dp, date] = Read_xp(xp150, dateselected);
 wave_xp150 = [hs, tp, dp, date];
 wave_xp150(:, 4)
+
+
+wave_xp150_3days = str2double(wave_xp150(:, [1,2,3]));
 %% save data  xp125
 
 [hs, tp, dp, date] = Read_xp(xp125, dateselected);
 wave_xp125 = [hs, tp, dp, date];
 wave_xp125(:, 4)
+wave_xp125_3days = str2double(wave_xp125(:, [1,2,3]));
 
 
 %% combined data as one matrix
