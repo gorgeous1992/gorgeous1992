@@ -1,7 +1,7 @@
 clc
 clear all
 
-%var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
+var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
 Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2017/FRF-ocean_waves_8m-array_201704.nc';
 %ncdisp(Bd_data)
 %Inside date
@@ -14,10 +14,10 @@ xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/x
 
 DateString = [[2017,04,11,12,00,00];[2017,04,14,13,00,00]];
 dateselected = datenum(DateString);
-%% save data 8m_array 
+%% save data 8m_array f
 
 [hs, tp, dp, date] = Read_awac_adop(Bd_data, dateselected);
-[dir, date] = Readwavedir_awac_adop(Bd_data, dateselected);
+[dir, date] = Readwavedir_awac_adop(Bd_data, dateselected)
 bdry = [hs, tp, dp, dir, date];
 bdry(:, 5)
 

@@ -2,16 +2,16 @@ clc
 clear all
 %% Plot topo 2-D graph
 %Load topo data
-topo = importdata('topo04112017.txt')
+topo = importdata('topo04112017.txt');
 %topo values
-T = topo(:, 3);
 x_topo = [50:12:950]';
 y_topo = [-100:24:1100]';
+topo_2d = reshape(topo(:, 3),[length(x_topo), length(y_topo)]);
 
 figure
 subplot(1,2,1)
 [X, Y] = meshgrid(x_topo, y_topo);
-surf(X, Y, Topo')
+surf(X, Y, topo_2d')
 xlabel('Crossshore distance(m)')
 ylabel('Alongshore distance(m)')
 zlabel('Elevation')
@@ -21,16 +21,15 @@ title('Elevation')
 %Coordinate y is -100:24:1100
 
 %load topo data for y=950
-T1 = load('topo401117.mat');
-Topo = (T1(:, 4));
-Topo_y1 = T1(:,3);
+T1 = load('topo041117_global.mat')
+Topo_y1 = T1.topo(:, 4);
 
-figure
 %Plot the depth_y1, one piece
+subplot(1,2,2)
 plot(x_topo, Topo_y1)
 xlabel('Crossshore distance(m)')
 ylabel('Elevation')
-title('Elevation (fixed y = y1)')
+title('Elevation (fixed y = 950)')
 
 
 

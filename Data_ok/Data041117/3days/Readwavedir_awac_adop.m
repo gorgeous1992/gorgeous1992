@@ -14,7 +14,9 @@ datatime = string(datestr(time(id)));
 
 %ncdisp(file)
 %get wave height
-wavedir = ncread(file, 'waveDirectionEstimator');
+wavedir = ncread(file, 'waveMeanDirection');
+nan_id = find(isnan(wavedir) == 1);
+wavedir(nan_id) = -1000;
 
 wavedir_id = wavedir(id);
 end
