@@ -8,7 +8,8 @@ function [wavedir_id, datatime] = Readwavedir_awac_adop(file, date)
 tt = ncread(file,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
 tm = date;
-id =find(floor(time) == tm);
+%get all needed time
+id = find(time >= tm(1) & time <= tm(2));
 datatime = string(datestr(time(id)));
 
 %ncdisp(file)
@@ -16,5 +17,4 @@ datatime = string(datestr(time(id)));
 wavedir = ncread(file, 'waveDirectionEstimator');
 
 wavedir_id = wavedir(id);
-
 end

@@ -7,8 +7,8 @@ function [wavehsid, wavetpid, depthid, datatime] = Read_xp(file, date)
 %Get time from it.
 tt = ncread(file,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
-tm = date;
-id =find(floor(time) == tm);
+tm = date;%get all needed time
+id = find(time >= tm(1) & time <= tm(2));
 datatime = string(datestr(time(id)));
 
 %ncdisp(file)

@@ -8,8 +8,10 @@ function [wavehsid, wavetpid, depthid, datatime] = Read_awac_adop(file, date)
 tt = ncread(file,'time');
 time = tt/(24*3600) + datenum(1970,1,1);
 tm = date;
-id =find(floor(time) == tm);
+%get all needed time
+id = find(time >= tm(1) & time <= tm(2));
 datatime = string(datestr(time(id)));
+
 
 %ncdisp(file)
 %get wave height
@@ -22,4 +24,5 @@ depth = ncread(file, 'depth');
 wavehsid = waveHs(id);
 wavetpid = waveTp(id);
 depthid = depth(id);
+
 end

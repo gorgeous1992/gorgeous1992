@@ -12,20 +12,23 @@ xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/x
 xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2017/FRF-ocean_waves_xp125m_201704.nc';
 %xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201704.nc';
 
-dateselected = [datenum(2017, 04, 12)];
+DateString = [[2017,04,11,13,00,00];[2017,04,14,13,00,00]];
+dateselected = datenum(DateString);
 %% save data 8m_array 
 
 [hs, tp, dp, date] = Read_awac_adop(Bd_data, dateselected);
 [dir, date] = Readwavedir_awac_adop(Bd_data, dateselected);
 bdry = [hs, tp, dp, dir, date];
 bdry(:, 5)
+
+boundary_3days = bdry(:, [1,2,3,4]);
 %% save data  awac_6
 
 [hs, tp, dp, date] = Read_awac_adop(awac_6, dateselected);
 [dir, date] = Readwavedir_awac_adop(awac_6, dateselected);
 wave_awac6 = [hs, tp, dp, dir, date];
 wave_awac6(:, 5)
-
+wave_awac6_3days = wave_awac6(:, [1,2,3,4]);
 %% save data  awac_45
 
 [hs, tp, dp, date] = Read_awac_adop(awac_45, dateselected);
@@ -53,7 +56,7 @@ wave_xp125(:, 4)
 %% combined data as one matrix
 %wavedata is a matrix with data at awac_8m, 6m, 5m each row
 %[waveHs waveTp depth]
-xid = [17, 17, 1, 17, 17, 17];
+xid = find(date);
 
 %% Longitude and latitude for sensors
 alpha = [ncread(Bd_data, 'longitude'); ncread(awac_6, 'longitude'); ...
@@ -65,9 +68,9 @@ beta = [ncread(Bd_data, 'latitude'); ncread(awac_6, 'latitude'); ...
     ncread(xp150, 'lat'); ncread(xp125, 'lat')];
 
 
-wavedata = str2double([bdry(xid(1), [1:3]); wave_awac6(xid(2), [1:3]);...
-           wave_awac6(xid(3), [1:3]); wave_adop35(xid(4), [1:3]); ...
-            wave_xp150(xid(5), [1:3]); wave_xp125(xid(6), [1:3])]);
+wavedata = str2double([bdry(xid, [1:3]); wave_awac6(xid, [1:3]);...
+           wave_awac6(xid, [1:3]); wave_adop35(xid, [1:3]); ...
+            wave_xp150(xid, [1:3]); wave_xp125(xid, [1:3])]);
 
 wavedata_global = [alpha, beta, wavedata]    
 %save('wavedata20160525_11am', 'wavedata');
