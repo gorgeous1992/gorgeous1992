@@ -21,7 +21,7 @@ dateselected = datenum(DateString);
 bdry = [hs, tp, dp, dir, date];
 bdry(:, 5)
 
-boundary_3days = bdry(:, [1,2,3,4]);
+boundary_3days = str2double(bdry(:, [1,2,3,4]));
 %% save data  awac_6
 
 [hs, tp, dp, date] = Read_awac_adop(awac_6, dateselected);
