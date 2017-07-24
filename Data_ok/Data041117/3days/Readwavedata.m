@@ -29,7 +29,10 @@ boundary_3days = str2double(bdry(:, [1,2,3,4]));
 wave_awac6 = [hs, tp, dp, dir, date];
 wave_awac6(:, 5)
 
-wave_awac6_3days = str2double(wave_awac6(:, [1,2,3,4]));
+%lack of 04/12/2017 6am,7am
+wave_awac6_3days = str2double([wave_awac6(1:17, [1,2,3,4]);
+                              zeros(2, 4);
+                              wave_awac6(18:end, [1,2,3,4])]);
 %% save data  awac_45
 
 [hs, tp, dp, date] = Read_awac_adop(awac_45, dateselected);
@@ -37,14 +40,17 @@ wave_awac6_3days = str2double(wave_awac6(:, [1,2,3,4]));
 wave_awac45 = [hs, tp, dp, dir, date];
 wave_awac45(:, 5)
 
-wave_awac45_3days = str2double(wave_awac45(:, [1,2,3,4]));
+%lack of 04/11/2017 13-15pm
+wave_awac45_3days = str2double([zeros(3, 4);
+                               wave_awac45(:, [1,2,3,4])]);
 %% save data  adop_35
 [hs, tp, dp, date] = Read_awac_adop(adop_35, dateselected);
 [dir, date] = Readwavedir_awac_adop(adop_35, dateselected);
 wave_adop35 = [hs, tp, dp, dir, date];
 wave_adop35(:, 5)
 
-wave_adop35_3days = str2double(wave_adop35(:, [1,2,3,4]));
+wave_adop35_3days = str2double(wave_adop35(1:(length(wave_adop35(:, 5))-1),...
+                              [1,2,3,4]));
 %% save data  xp150
 
 [hs, tp, dp, date] = Read_xp(xp150, dateselected);
