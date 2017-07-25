@@ -28,3 +28,12 @@ yjd = find(ym == 950);
 cBathy_depth = [xm, wavedepth(:, yjd, :)];
 
 %wavedepth_data = [xm, wavedepth_1d];
+
+%% cBathy from Davoud
+
+bathy = load('cBathy_results 2017apr.1.mat')
+h = bathy.fCombined.h;
+ym = bathy.ym;
+id = find(ym == 950);
+depth = h(id, :)'
+
