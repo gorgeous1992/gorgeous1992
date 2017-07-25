@@ -1,18 +1,18 @@
 clc
 clear all
 
-var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
-Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2017/FRF-ocean_waves_8m-array_201704.nc';
+%var = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/projects/bathyduck/data/cbathy/Bathyduck-ocean_bathy_argus_201604.nc';
+Bd_data = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/8m-array/2017/FRF-ocean_waves_8m-array_201701.nc';
 %ncdisp(Bd_data)
 %Inside date
-awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2017/FRF-ocean_waves_awac-6m_201704.nc';
-awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-4.5m/2017/FRF-ocean_waves_awac-4.5m_201704.nc';
-adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/adop-3.5m_tjh/2017/FRF-ocean_waves_adop-3.5m_201704.nc';
-xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2017/FRF-ocean_waves_xp150m_201704.nc';
-xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2017/FRF-ocean_waves_xp125m_201704.nc';
+awac_6 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-6m/2017/FRF-ocean_waves_awac-6m_201701.nc';
+awac_45 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/awac-4.5m/2017/FRF-ocean_waves_awac-4.5m_201701.nc';
+adop_35 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/adop-3.5m_tjh/2017/FRF-ocean_waves_adop-3.5m_201701.nc';
+xp150 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp150m_tjh/2017/FRF-ocean_waves_xp150m_201701.nc';
+xp125 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp125m_tjh/2017/FRF-ocean_waves_xp125m_201701.nc';
 %xp200 = 'https://chlthredds.erdc.dren.mil/thredds/dodsC/frf/oceanography/waves/xp200m_tjh/2016/FRF-ocean_waves_xp200m_201704.nc';
 
-DateString = [[2017,04,11,12,00,00];[2017,04,14,13,00,00]];
+DateString = [[2017,01,01,12,00,00];[2017,01,31,21,00,00]];
 dateselected = datenum(DateString);
 %% save data 8m_array f
 
@@ -48,6 +48,11 @@ wave_awac45_3days = str2double([zeros(4, 4);
 [dir, date] = Readwavedir_awac_adop(adop_35, dateselected);
 wave_adop35 = [hs, tp, dp, dir, date];
 wave_adop35(:, 5)
+
+
+
+
+
 
 wave_adop35_3days = str2double(wave_adop35(1:(length(wave_adop35(:, 5))-1),...
                               [1,2,3,4]));
