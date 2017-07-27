@@ -5,7 +5,7 @@ clear all
 %Run it in command terminal!!!!!
 %Don't run the script!!!
 
-bathy = load('cBathy_results 2017apr.1.mat')
+bathy = load('bathy_result2017Apr11.mat')
 h = bathy.fCombined.h;
 ym = (bathy.ym)';
 id = find(ym == 950);
